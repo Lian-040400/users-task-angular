@@ -1,4 +1,5 @@
 @import "./../../../../../assets/mixin";
+
 .user-card {
     @include card;
     overflow: hidden;
@@ -49,6 +50,7 @@
                 background-color: #0782cf;
             }
         }
+        
         .remove {
             width: 50%;
             padding: 10px 0px;

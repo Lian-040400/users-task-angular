@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { CustomerDashboardModule } from './modules/customer-dashboard/customer-dashboard.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import { CustomerDashboardModule } from './modules/customer-dashboard/customer-d
   ],
   imports: [
     BrowserModule,
-    CustomerDashboardModule
+    CustomerDashboardModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
