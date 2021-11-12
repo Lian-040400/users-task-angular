@@ -1,5 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatNativeDateModule } from '@angular/material/core';
+import {HttpClientModule } from "@angular/common/http";
+
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { HeaderComponent } from './components/header/header.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
@@ -11,9 +14,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormComponent } from './components/form/form.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -23,10 +24,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     UserDashboardComponent,
     UserCardComponent,
     ModalComponent,
-    FormComponent,
-    
   ],
   imports: [
+    HttpClientModule,
     CommonModule,
     MatDialogModule,
     MatButtonModule,

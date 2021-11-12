@@ -1,11 +1,35 @@
 <h2 mat-dialog-title>Add User</h2>
 <!-- <h2 mat-dialog-title>Edit User</h2> -->
 <mat-dialog-content   class="mat-typography">
-     <app-form></app-form>
+    <form [formGroup]="form" class="data-form">
+        <mat-form-field class="input" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input formControlName="name" matInput required>
+            <mat-error>{{getControlError(form.controls.name)}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input" appearance="fill">
+            <mat-label>FirstName</mat-label>
+            <input formControlName="firstName" matInput required>
+            <mat-error>{{getControlError(form.controls.firstName)}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input" >
+            <mat-label>Date</mat-label>
+            <input formControlName="date" matInput [matDatepicker]="picker" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>{{getControlError(form.controls.date)}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input" >
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required>
+            <mat-error>{{getControlError(form.controls.email)}}</mat-error>
+        </mat-form-field>
+    </form>
+    
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button cdkFocusInitial>Install</button>
+    <button (click)="addUser()" mat-button cdkFocusInitial>Add</button>
     <button mat-button cdkFocusInitial>Edit</button>
 </mat-dialog-actions>
