@@ -1,16 +1,16 @@
-<h2 mat-dialog-title>Add User</h2>
+<h2 mat-dialog-title>{{title}}</h2>
 <!-- <h2 mat-dialog-title>Edit User</h2> -->
 <mat-dialog-content   class="mat-typography">
     <form [formGroup]="form" class="data-form">
         <mat-form-field class="input" appearance="fill">
             <mat-label>Name</mat-label>
-            <input formControlName="name" matInput required>
-            <mat-error>{{getControlError(form.controls.name)}}</mat-error>
+            <input formControlName="firstName" matInput required>
+            <mat-error>{{getControlError(form.controls.firstName)}}</mat-error>
         </mat-form-field>
         <mat-form-field class="input" appearance="fill">
             <mat-label>FirstName</mat-label>
-            <input formControlName="firstName" matInput required>
-            <mat-error>{{getControlError(form.controls.firstName)}}</mat-error>
+            <input formControlName="lastName" matInput required>
+            <mat-error>{{getControlError(form.controls.lastName)}}</mat-error>
         </mat-form-field>
         <mat-form-field class="input" >
             <mat-label>Date</mat-label>
@@ -30,6 +30,6 @@
 <mat-dialog-actions align="end">
   
     <button mat-button mat-dialog-close>Cancel</button>
-    <button (click)="addUser()" mat-button cdkFocusInitial>Add</button>
-    <button mat-button cdkFocusInitial>Edit</button>
+    <button *ngIf="!editMode" (click)="addNewUser()" mat-button cdkFocusInitial>Add</button>
+    <button *ngIf="editMode"  (click)="editUserData()"mat-button cdkFocusInitial>Edit</button>
 </mat-dialog-actions>

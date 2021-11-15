@@ -1,6 +1,8 @@
-import { Component, DoCheck, ElementRef, OnInit, ViewChild } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import { ModalComponent} from '../modal/modal.component';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../modal/modal.component';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-add-user',
@@ -8,14 +10,22 @@ import { ModalComponent} from '../modal/modal.component';
   styleUrls: ['./add-user.component.scss']
 })
 export class AddUserComponent {
-  constructor(public dialog: MatDialog) {}
+  @Output() addUser = new EventEmitter();
+
+  constructor(
+    private usersService: UsersService,
+    public dialog: MatDialog
+  ) { }
 
   openDialog() {
     const dialogRef = this.dialog.open(ModalComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    dialogRef.componentInstance.title = 'Add User';
+    dialogRef.componentInstance.addUser.subscribe(userData => {
+      this.usersService.addUsers(userData)
+        .subscribe(newUser => {
+          this.addUser.emit(newUser);
+          dialogRef.close();
+        });
+    })
   }
-  
 }
