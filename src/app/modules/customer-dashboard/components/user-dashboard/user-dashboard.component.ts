@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
 import { UsersService } from "../../services/users.service";
 @Component({
@@ -15,7 +15,6 @@ export class UserDashboardComponent implements OnInit {
       this.users = users;
     });
   }
-
   addNewUser(newUser: User): void {
     this.users.push(newUser);
   }
@@ -26,10 +25,10 @@ export class UserDashboardComponent implements OnInit {
         this.users = this.users.filter(user => user.id !== userToRemove.id);
       })
   }
-  editUser(editedUser:User):void{
+  editUser(editedUser: User):void{
     this.usersService.editUser(editedUser)
     .subscribe(() => {
-      this.users = this.users.filter(user => user == editedUser);
+      Object.assign(this.users.find(user => user.id === editedUser.id), editedUser)
     })
   }
 }

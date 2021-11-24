@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import {  Validators } from "@angular/forms";
+import { Validators } from "@angular/forms";
+import { User } from '../../models/user.model';
 
 const ERROR_MESSAGES: any = {
   email: () => 'invaid email',
@@ -14,6 +15,7 @@ const ERROR_MESSAGES: any = {
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit {
+  user!: User;
   title = '';
   form!: FormGroup;
   editMode = false;
@@ -22,7 +24,7 @@ export class ModalComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -32,11 +34,11 @@ export class ModalComponent implements OnInit {
     if (!control.touched) {
       return ''
     }
-  
-    for(const [key, value] of Object.entries(control.errors || {})) {
+
+    for (const [key, value] of Object.entries(control.errors || {})) {
       return ERROR_MESSAGES[key](value);
     }
-  
+
     return '';
   }
 
@@ -49,7 +51,7 @@ export class ModalComponent implements OnInit {
     })
   }
 
-  addNewUser(){
+  addNewUser() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
       const newUser = this.form.value;
@@ -57,14 +59,15 @@ export class ModalComponent implements OnInit {
       this.addUser.emit(newUser);
     }
   }
-  editUserData(){
-  this.form.markAllAsTouched();
-  if (this.form.valid) {
-    const newUser = this.form.value;
-    newUser.date = newUser.date.getTime();
-    this.editUser.emit(newUser);
+  
+  editUserData() {
+    this.form.markAllAsTouched();
+    if (this.form.valid) {
+      const newUser = new User(this.form.value);
+      newUser.id = this.user.id;
+      this.editUser.emit(newUser);
+    }
   }
- 
-}}
- 
+}
+
 

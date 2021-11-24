@@ -12,6 +12,7 @@ import { ModalComponent } from '../modal/modal.component';
 export class UserCardComponent {
   @Input() user!: User
   @Output() deleteUser = new EventEmitter<User>();
+  @Output() editUser = new EventEmitter<User>();
 
   constructor(
     public dialog: MatDialog
@@ -24,7 +25,12 @@ export class UserCardComponent {
   edit(): void {
     const dialogRef = this.dialog.open(ModalComponent);
     dialogRef.componentInstance.title = 'Edit User';
+    dialogRef.componentInstance.user = this.user;
     dialogRef.componentInstance.editMode = true;
+    dialogRef.componentInstance.editUser.subscribe(user => {
+      this.editUser.emit(user);
+      dialogRef.close();
+    });
     dialogRef.afterOpened().subscribe(() => {
       dialogRef.componentInstance.form.patchValue(this.user);
     })

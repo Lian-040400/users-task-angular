@@ -16,7 +16,6 @@ export class AddUserComponent {
     private usersService: UsersService,
     public dialog: MatDialog
   ) { }
-
   openDialog() {
     const dialogRef = this.dialog.open(ModalComponent);
     dialogRef.componentInstance.title = 'Add User';

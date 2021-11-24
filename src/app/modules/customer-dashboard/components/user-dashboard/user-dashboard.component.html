@@ -1,12 +1,14 @@
 <div class="page-container">
     <div class="list-container">
         <app-header></app-header>
-        <div class="users" >
+        <div class="users">
             <app-add-user (addUser)="addNewUser($event)"></app-add-user>
-            <app-user-card *ngFor="let user of users" 
-            (deleteUser)="deleteUser($event)"
-            [user]="user">
-         </app-user-card>
+            <div cdkDropList>
+                <app-user-card cdkDrag *ngFor="let user of users" (editUser)="editUser($event)"
+                    (deleteUser)="deleteUser($event)" [user]="user">
+                </app-user-card>
+            </div>
+
         </div>
     </div>
 </div>
